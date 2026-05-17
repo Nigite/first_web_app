@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stage 1</title>
+    <style>
+        body {
+            background-color: #0f0f1a;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 50px;
+            
+            /* NEW: Plays the fade-in animation for 1.5 seconds when the page loads */
+            animation: fadeInFromBlack 1.5s ease-in;
+        }
+
+        /* NEW: The animation instructions */
+        @keyframes fadeInFromBlack {
+            0% { opacity: 0; }     /* Starts pitch black/invisible */
+            100% { opacity: 1; }   /* Slowly reveals the minefield */
+        }
+        
+        /* The Grid to hold our buttons */
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        /* How BOTH buttons look normally */
+        .trap-btn, .safe-btn {
+            background-color: #1e1e2f;
+            color: white;
+            border: 1px solid #444;
+            padding: 20px;
+            width: 70px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        /* TRAP HOVER: Glows Red */
+        .trap-btn:hover {
+            background-color: #ff0055;
+            border-color: #ff0055;
+        }
+
+        /* SAFE HOVER: Glows Orange */
+        .safe-btn:hover {
+            background-color: #ff0055;
+            border-color: #ff8000;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>STAGE 1: THE MINEFIELD</h1>
+    <p>One path leads forward. The rest will reset your progress. Look closely.</p>
+    {% if is_vip %}
+        <div style="background-color: #333; color: yellow; padding: 10px; margin: 20px auto; width: 300px; border: 1px dashed yellow;">
+            <strong>SYSTEM HINT:</strong> The correct button emits a slight orange glow when scanned (hovered).<br>(PS.)There, I made it a little easier for you to solve mwhehehhehe.
+        </div>
+    {% endif %}
+
+    <div class="grid-container">
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="/stage-2" class="safe-btn" onclick="startTransition(event)">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+        <a href="" class="trap-btn">CLICK</a>
+    </div>
+
+</body>
+</html>

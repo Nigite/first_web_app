@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Gauntlet</title>
+    <style>
+        body {
+            background-color: #0f0f1a;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding-top: 150px;
+            margin: 0;
+            
+            /* NEW: This tells the body to play our boot animation for 2 seconds */
+            animation: systemBoot 2s ease-out; 
+        }
+
+        /* NEW: The animation instructions */
+        @keyframes systemBoot {
+            0% { opacity: 0; transform: translateY(30px); }   /* Starts invisible and pushed down */
+            100% { opacity: 1; transform: translateY(0); }    /* Ends fully visible in normal position */
+        }
+        
+        /* Your original button CSS */
+        .start-btn {
+            background-color: transparent;
+            color: #ff0055;
+            border: 2px solid #ff0055;
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+        }
+        .start-btn:hover {
+            background-color: #ff0055;
+            color: white;
+            box-shadow: 0px 0px 20px #ff0055;
+            transform: scale(1.1);
+        }
+
+        /* --- NEW: The Transition Screen CSS --- */
+        #hack-screen {
+            position: fixed;        /* Locks it to the screen */
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: #000; /* Pitch black */
+            z-index: 9999;          /* Puts it on top of everything else */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /* By default, it's invisible and ignores mouse clicks */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in; /* Fades in smoothly */
+        }
+
+        /* When we add this class via JavaScript, the screen turns on */
+        #hack-screen.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .hacker-text {
+            color: #00ffcc;
+            font-size: 40px;
+            text-shadow: 0px 0px 10px #00ffcc;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>SYSTEM BREACH DETECTED.</h1>
+    <p>5 Security Layers Remain. Can you reach the core?</p>
+    
+    <a href="/stage-1" class="start-btn" onclick="startTransition(event)">INITIATE HACK</a>
+
+    <div id="hack-screen">
+        <h2 class="hacker-text">BYPASSING FIREWALL...</h2>
+    </div>
+
+    <script>
+        function startTransition(event) {
+            // 1. Stop the link from jumping to Stage 1 instantly
+            event.preventDefault(); 
+            
+            // 2. Turn on the black transition screen
+            document.getElementById('hack-screen').classList.add('active');
+            
+            // 3. Wait exactly 2 seconds (2000 milliseconds), then jump to Stage 1
+            setTimeout(function() {
+                window.location.href = "/stage-1";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
