@@ -69,9 +69,28 @@ def stage_2():
     return render_template("stage2.html", error=error_message, is_vip=vip_status)
 
 # --- STAGE 3: The Hacker (Placeholder) ---
-@app.route("/stage-3")
+# --- STAGE 3: The Hacker ---
+@app.route("/stage-3", methods=["GET", "POST"])
 def stage_3():
-    return "<h1>You beat the Gatekeeper! Stage 3 coming soon...</h1>"
+    error_message = None
+    vip_status = session.get("is_vip", False)
+
+    if request.method == "POST":
+        # Grab the passkey
+        user_guess = request.form.get("passkey", "").strip().lower()
+        
+        # The secret password is "omega_protocol"
+        if user_guess == "omega_protocol":
+            return redirect("/stage-4")
+        else:
+            error_message = "ACCESS DENIED: INVALID OVERRIDE KEY."
+
+    return render_template("stage3.html", error=error_message, is_vip=vip_status)
+
+# --- STAGE 4: The URL Manipulator (Placeholder) ---
+@app.route("/stage-4")
+def stage_4():
+    return "<h1>You hacked the mainframe! Stage 4 coming soon...</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)
