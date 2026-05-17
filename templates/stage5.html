@@ -48,7 +48,7 @@
 </head>
 <body>
 
-    <div class="victory-box">
+   <div class="victory-box">
         <h1>[ SYSTEM COMPROMISED ]</h1>
         <hr style="border: 1px solid #00ff66; margin-bottom: 25px;">
 
@@ -56,18 +56,38 @@
         <div class="log-line line-2">> Extracting Mainframe Datapacks... DONE</div>
         <div class="log-line line-3">> Initializing Root Privilege Level... GRANTED</div>
 
+        <hr style="border: 1px dashed #00ff66; margin-top: 25px; margin-bottom: 25px;">
+
         {% if is_vip %}
             <div class="badge vip-badge">
                 🏆 LEVEL ATTAINED: ELITE ADMIN MASTER 🏆
-                <br><span style="font-size: 14px;">Bypassed via Internal Overrides</span>
             </div>
         {% else %}
             <div class="badge player-badge">
                 🏆 LEVEL ATTAINED: THE ULTIMATE HACKER 🏆
-                <br><span style="font-size: 14px;">Bypassed via Pure Core Exploits</span>
             </div>
         {% endif %}
-    </div>
 
+        <div style="margin-top: 20px; line-height: 1.6; color: #a3ffa3; font-size: 15px;">
+            <p><strong>[ SYSTEM NOTE: INIT_PURPOSE ]</strong></p>
+            <p>Congratulations, recruit. If you are reading this, you have completed the network calibration trials. You weren't just playing a game; you were testing your awareness of the perimeter.</p>
+            <p>By finding backdoors in loopback configurations, digging into the core DOM structure, and manipulating query strings, you have proven your capacity to see beyond the interface. Your true training begins now.</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <button onclick="window.location.href='/special-message'" style="background-color: transparent; color: #00ff66; border: 2px solid #00ff66; padding: 12px 25px; font-family: 'Courier New'; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                📂 VIEW INITIATION DEBRIEF
+            </button>
+        </div>
+
+        {% if is_vip %}
+            <div style="text-align: center; margin-top: 15px; border-top: 1px dotted #00ffcc; padding-top: 15px;">
+                <button onclick="window.location.href='/admin-panel'" style="background-color: #002244; color: #00ffcc; border: 2px solid #00ffcc; padding: 12px 25px; font-family: 'Courier New'; font-weight: bold; cursor: pointer; box-shadow: 0 0 15px #00ffcc; transition: 0.3s; width: 100%;">
+                    🛠️ ENTER SYSTEM MANAGEMENT PANEL
+                </button>
+            </div>
+        {% endif %}
+
+    </div>
 </body>
 </html>

@@ -22,10 +22,9 @@ def login():
 # --- DEACTIVATE VIP MODE (LOGOUT) ---
 @app.route("/logout")
 def logout():
-    # This snipps off the VIP wristband and throws it in the trash
-    session.pop("is_vip", None) 
-    
-    # Send them back to the start as a normal player
+    # This completely wipes the session, destroying BOTH the vip_status 
+    # and the cleared_stage_4 token!
+    session.clear() 
     return redirect("/")
 
 # --- THE ENTRANCE ---
@@ -105,16 +104,38 @@ def stage_4():
 # --- STAGE 5: The Final Win Screen ---
 @app.route("/stage-5")
 def stage_5():
-    # SECURITY CHECK: Did they actually clear stage 4?
     has_token = session.get("cleared_stage_4", False)
     vip_status = session.get("is_vip", False)
     
     if not has_token:
-        # Kicked to the cheater dungeon if they tried to skip ahead
         return render_template("cheat_trap.html")
         
-    # If they passed honestly, show the glorious victory page!
     return render_template("stage5.html", is_vip=vip_status)
+
+
+# --- NEW: VIP Special Message Route ---
+@app.route("/special-message")
+def special_message():
+    vip_status = session.get("is_vip", False)
+    has_token = session.get("cleared_stage_4", False)
+
+    # SECURITY CHECK: If they aren't a VIP, or if they haven't even beaten the game, kick them out!
+    if not has_token:
+        return "<h1>⚠️ ACCESS DENIED.</h1>", 403
+
+    return render_template("special_message.html")
+
+# --- NEW: Dedicated Admin Panel Route ---
+@app.route("/admin-panel")
+def admin_panel():
+    vip_status = session.get("is_vip", False)
+    has_token = session.get("cleared_stage_4", False)
+
+    # Boot them out if they aren't an admin or haven't finished the game
+    if not vip_status or not has_token:
+        return "<h1>⚠️ ACCESS DENIED: Authorized Administrators Only.</h1>", 403
+
+    return render_template("admin_panel.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
