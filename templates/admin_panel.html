@@ -16,7 +16,7 @@
             border: 2px solid #ff009d; 
             padding: 40px;
             display: inline-block; 
-            max-width: 1000px; 
+            max-width: 1200px; /* Expanded max-width slightly for collage spacing */
             text-align: left;
             box-shadow: 0 0 20px rgba(0,255,204,0.3);
             margin-top: 50px;
@@ -28,6 +28,89 @@
             text-align: center; 
             font-size: 28px;
         }
+        
+        /* Modified Flexbox layout to put text and collage side-by-side */
+        .split-layout {
+            display: flex;
+            align-items: flex-start; /* aligns items to the top, letting the collage naturally flow heightwise */
+            justify-content: space-between; /* pushes text and collage to opposite sides */
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap-reverse; /* for phone compatibility */
+        }
+        
+        .text-section {
+            flex: 1; /* text section takes remaining space */
+            min-width: 300px;
+        }
+
+        /* NEW/Modified section for tilted collage area */
+        .image-section {
+            flex: 0 0 45%; /* Collage takes a defined percentage of the box width */
+            max-width: 450px;
+            text-align: center;
+            /* Parent coordinates: absolutely positioned elements inside are relative to THIS section */
+            position: relative;
+            /* REQUIRED: define a height for this section, otherwise the absolutely positioned elements collapse it */
+            min-height: 550px;
+            margin-top: 20px;
+        }
+
+        /* 1. Base style for every photo frame (Polaroid border effect) */
+        .tilted-photo-frame {
+            position: absolute; /* positioned relative to .image-section */
+            background-color: #111726; /* match main box background */
+            padding: 10px; /* border thickness */
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* softer, photo shadow */
+            transition: transform 0.3s ease, z-index 0.3s ease; /* smooth hover transitions */
+            
+            /* Glowing pink border effect to match main box */
+            border: 2px solid #ff009d;
+            box-shadow: 0 0 15px rgba(255, 0, 157, 0.4);
+        }
+
+        /* 2. The photo image itself inside the frame */
+        .tilted-photo-frame img {
+            max-width: 220px; /* Base width of each individual photo */
+            height: auto;
+            display: block;
+            border-radius: 3px;
+        }
+
+        /* Hover Effect: Straightens out and pops photo to the top */
+        .tilted-photo-frame:hover {
+            transform: rotate(0deg) scale(1.05); /* Straightens and zooms slightly */
+            z-index: 10; /* Pops to the absolute top */
+            box-shadow: 0 10px 20px rgba(255, 0, 157, 0.8); /* Increases glow */
+        }
+
+        /* 3. Positioning and Tilting (Individual Classes) */
+
+        /* Photo 1: Top Right, Tilted Right (Top Layer) */
+        .tilted-photo-frame.p1 {
+            top: 0;
+            right: 0;
+            transform: rotate(7deg);
+            z-index: 2; /* Spaced vertically, P1 in front of P2 */
+        }
+
+        /* Photo 2: Below Photo 1, Tilted Left (Hidden Layer) */
+        .tilted-photo-frame.p2 {
+            top: 180px; /* vertical spacing */
+            right: 50px; /* overlapping position shift */
+            transform: rotate(-10deg);
+            z-index: 1; /* Layer behind P1 and P3 */
+        }
+
+        /* Photo 3: Bottom Left ish, Tilted Right (Absolute Front) */
+        .tilted-photo-frame.p3 {
+            top: 350px;
+            right: 15px;
+            transform: rotate(5deg);
+            z-index: 3; /* Layer at absolute front */
+        }
+
         p {
             line-height: 2.0;
             font-size: 16px;
@@ -40,24 +123,46 @@
         <h1>[ CLASSIFIED ADMIN LOG ]</h1>
         <hr style="border: 1px solid #ff009d; margin-bottom: 25px;">
 
-        <p><strong>[ ACCESS GRANTED ]</strong></p>
-        
-        <p>This channel is reserved exclusively for the system administrator of my life.</p>
-        
-        <p>There's this girl that always make my heart flutter just by smiling, 
-            there's this girl that can make my worries go away with just her talking to me, 
-            there's this girl that is so beautiful but she thinks otherwise, 
-            there's this girl that i am so in love with that i want to do anything for her, 
-            there's this girl that always here for me when i need her, 
-            there's this girl that is so precious that makes me want to protect her, 
-            there's this girl that is so perfect i want to be with her.</p>
+        <div class="split-layout">
+            
+            <div class="text-section">
+                <p><strong>[ ACCESS GRANTED ]</strong></p>
+                
+                <p>This channel is reserved exclusively for the system administrator of my life.</p>
+                
+                <p>There's this girl that always make my heart flutter just by smiling, 
+                    there's this girl that can make my worries go away with just her talking to me, 
+                    there's this girl that is so beautiful but she thinks otherwise, 
+                    there's this girl that i am so in love with that i want to do anything for her, 
+                    there's this girl that always here for me when i need her, 
+                    there's this girl that is so precious that makes me want to protect her, 
+                    there's this girl that is so perfect i want to be with her.</p>
 
-        <p>Happy Anniversary, my love. I hope you like this little surprise i made for you. 
-            I know it's not much but i just want to show you how much i care for you and how much i love you. 
-            Thank you for being in my life and making it so much better. 
-            I am so lucky to have you as my girlfriend and i will always cherish you.</p>
+                <p>Happy Anniversary, my love. I hope you like this little surprise i made for you. 
+                    I know it's not much but i just want to show you how much i care for you and how much i love you. 
+                    Thank you for being in my life and making it so much better. 
+                    I am so lucky to have you as my girlfriend and i will always cherish you.</p>
+            </div>
 
-        <div style="text-align: center; margin-top: 40px;">
+            <div class="image-section">
+                
+                <div class="tilted-photo-frame p1">
+                    <img src="{{ url_for('static', filename='cat1.jpg') }}" alt="Memory 1">
+                </div>
+                
+                <div class="tilted-photo-frame p2">
+                    <img src="{{ url_for('static', filename='cat2.png') }}" alt="Memory 2">
+                </div>
+                
+                <div class="tilted-photo-frame p3">
+                    <img src="{{ url_for('static', filename='cat3.webp') }}" alt="Memory 3">
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
             <a href="/stage-5" style="color: #aaa; text-decoration: none; font-weight: bold;">← Return to Vault</a>
         </div>
     </div>
