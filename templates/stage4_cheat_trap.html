@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Lockdown</title>
+    <style>
+        body { 
+            background-color: #1a0000; color: #ff3333; font-family: 'Courier New', monospace; 
+            text-align: center; padding: 50px; margin: 0; overflow: hidden;
+        }
+        .trap-box { 
+            background-color: #000; padding: 40px; border: 3px double #ff0055; 
+            display: inline-block; margin-top: 50px; box-shadow: 0px 0px 25px rgba(255,0,85,0.5);
+        }
+        h1 { font-size: 40px; text-shadow: 0 0 10px #ff0055; }
+        
+        /* The Runaway Escape Button */
+        #runaway-btn {
+            position: absolute; left: 50%; top: 70%;
+            transform: translate(-50%, -50%);
+            background-color: transparent; color: #ff0055; border: 2px solid #ff0055; 
+            padding: 15px 30px; font-size: 18px; cursor: pointer; font-family: 'Courier New';
+            font-weight: bold; transition: left 0.1s ease, top 0.1s ease;
+            box-shadow: 0 0 10px #ff0055;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="trap-box">
+        <h1>⚠️ SNEAK DETECTION WARNING ⚠️</h1>
+        <h2>INSECURE DIRECT OBJECT REFERENCE DETECTED.</h2>
+        <p>You attempted to force browse directly to the endpoint <code>/stage-5</code>.</p>
+        <p>The system has locked your coordinates. To undo the freeze protocol, click the interface unlock below.</p>
+    </div>
+
+    <button id="runaway-btn" onmouseover="dodgeMouse()" onclick="escapeTrap()">RE-CALIBRATE COORDINATES</button>
+
+    <script>
+        function dodgeMouse() {
+            const btn = document.getElementById('runaway-btn');
+            
+            // Generate a random position on the screen, keeping it safely inside the window boundaries
+            const randomX = Math.floor(Math.random() * (window.innerWidth - 300)) + 50;
+            const randomY = Math.floor(Math.random() * (window.innerHeight - 100)) + 50;
+            
+            // Move the button instantly
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function escapeTrap() {
+            alert("Lockdown lifted. Returning to authorization grid.");
+            window.location.href = "/stage-4";
+        }
+    </script>
+
+</body>
+</html>

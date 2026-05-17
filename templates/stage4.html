@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stage 4</title>
+    <style>
+        body { 
+            background-color: #0d0202; color: #ff3333; font-family: 'Courier New', monospace; 
+            text-align: center; padding: 50px; margin: 0; animation: fadeInFromBlack 1s ease-in; 
+        }
+        @keyframes fadeInFromBlack {
+            0% { opacity: 0; } 100% { opacity: 1; }
+        }
+        .alarm-box { 
+            background-color: #200505; padding: 40px; border: 2px solid #ff3333; 
+            display: inline-block; margin-top: 40px; box-shadow: 0px 0px 20px #ff3333;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0px 0px 10px #ff3333; }
+            100% { box-shadow: 0px 0px 30px #ff0000; }
+        }
+        .warning-sign { font-size: 80px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>STAGE 4: THE LOCATION TRAP</h1>
+    <p>The interface has been stripped. You are locked in a dead end.</p>
+
+    <div class="alarm-box">
+        <div class="warning-sign">🚨</div>
+        <h2>DETENTION PROTOCOL ACTIVATED</h2>
+        <p>No buttons. No inputs. No escape.</p>
+        <p><em>"Change your coordinates to override the system..."</em></p>
+    </div>
+
+    {% if is_vip %}
+        <div style="background-color: #1a331a; color: #00ffcc; padding: 10px; margin: 20px auto; width: 450px; border: 1px dashed #00ffcc;">
+            <strong>ADMIN BYPASS:</strong> Look at your browser's address bar. Add <code>?override=true</code> to the very end of the URL and hit Enter!
+        </div>
+    {% else %}
+        <div style="background-color: #333; color: yellow; padding: 10px; margin: 20px auto; width: 450px; border: 1px dashed yellow;">
+            <strong>SYSTEM HINT:</strong> Web browsers send extra instructions through the URL using parameters. Try adding an <code>override</code> query to your web address.
+        </div>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Compromised</title>
+    <style>
+        body { 
+            background-color: #050b05; color: #00ff66; font-family: 'Courier New', monospace; 
+            text-align: center; padding: 50px; margin: 0; overflow-x: hidden;
+            animation: bootUpScreen 0.5s ease-out;
+        }
+        @keyframes bootUpScreen {
+            0% { opacity: 0; filter: brightness(5); }
+            100% { opacity: 1; filter: brightness(1); }
+        }
+        
+        .victory-box {
+            background-color: rgba(0, 20, 5, 0.85);
+            border: 2px solid #00ff66;
+            padding: 40px;
+            display: inline-block;
+            margin-top: 30px;
+            max-width: 650px;
+            text-align: left;
+            box-shadow: 0px 0px 30px rgba(0, 255, 102, 0.3);
+        }
+
+        h1 { text-align: center; font-size: 38px; margin-top: 0; text-shadow: 0 0 10px #00ff66; }
+        
+        .log-line { margin: 10px 0; font-size: 16px; white-space: nowrap; overflow: hidden; border-right: 2px solid transparent; }
+        
+        /* Animated typing lines for terminal realism */
+        .line-1 { animation: typeText 1s steps(40) 0.5s both; }
+        .line-2 { animation: typeText 1s steps(40) 1.5s both; }
+        .line-3 { animation: typeText 1s steps(40) 2.5s both; }
+        
+        @keyframes typeText {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .badge {
+            display: block; text-align: center; font-size: 22px; font-weight: bold;
+            padding: 15px; margin-top: 30px; border: 1px dashed #00ff66;
+        }
+        .vip-badge { background-color: #002244; color: #00ffcc; border-color: #00ffcc; text-shadow: 0 0 10px #00ffcc; }
+        .player-badge { background-color: #112211; color: #00ff66; }
+    </style>
+</head>
+<body>
+
+    <div class="victory-box">
+        <h1>[ SYSTEM COMPROMISED ]</h1>
+        <hr style="border: 1px solid #00ff66; margin-bottom: 25px;">
+
+        <div class="log-line line-1">> Bypassing Firewalls... SUCCESS</div>
+        <div class="log-line line-2">> Extracting Mainframe Datapacks... DONE</div>
+        <div class="log-line line-3">> Initializing Root Privilege Level... GRANTED</div>
+
+        {% if is_vip %}
+            <div class="badge vip-badge">
+                🏆 LEVEL ATTAINED: ELITE ADMIN MASTER 🏆
+                <br><span style="font-size: 14px;">Bypassed via Internal Overrides</span>
+            </div>
+        {% else %}
+            <div class="badge player-badge">
+                🏆 LEVEL ATTAINED: THE ULTIMATE HACKER 🏆
+                <br><span style="font-size: 14px;">Bypassed via Pure Core Exploits</span>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

@@ -68,7 +68,6 @@ def stage_2():
 
     return render_template("stage2.html", error=error_message, is_vip=vip_status)
 
-# --- STAGE 3: The Hacker (Placeholder) ---
 # --- STAGE 3: The Hacker ---
 @app.route("/stage-3", methods=["GET", "POST"])
 def stage_3():
@@ -87,10 +86,35 @@ def stage_3():
 
     return render_template("stage3.html", error=error_message, is_vip=vip_status)
 
-# --- STAGE 4: The URL Manipulator (Placeholder) ---
+# --- STAGE 4: The URL Manipulator ---
 @app.route("/stage-4")
 def stage_4():
-    return "<h1>You hacked the mainframe! Stage 4 coming soon...</h1>"
+    vip_status = session.get("is_vip", False)
+    
+    # Python checks the URL for ?override=true
+    override_param = request.args.get("override", "").lower()
+    
+    if override_param == "true":
+        # SUCCESS: We hand them a hidden security token in their browser session
+        session["cleared_stage_4"] = True
+        return redirect("/stage-5")
+        
+    return render_template("stage4.html", is_vip=vip_status)
+
+
+# --- STAGE 5: The Final Win Screen ---
+@app.route("/stage-5")
+def stage_5():
+    # SECURITY CHECK: Did they actually clear stage 4?
+    has_token = session.get("cleared_stage_4", False)
+    vip_status = session.get("is_vip", False)
+    
+    if not has_token:
+        # Kicked to the cheater dungeon if they tried to skip ahead
+        return render_template("cheat_trap.html")
+        
+    # If they passed honestly, show the glorious victory page!
+    return render_template("stage5.html", is_vip=vip_status)
 
 if __name__ == "__main__":
     app.run(debug=True)
